@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/fragments/main_layout}">
+<head>
+
+<style type="text/css">
+.style-dieuhoa {
+	float: left;
+}
+</style>
+</head>
+<body>
+	<div class="content-wrapper" layout:fragment="content">
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0 text-dark">Dashboard</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="/admin/">Home</a></li>
+							<li class="breadcrumb-item active">Dashboard v1</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="row">
+								<div class="col-12">
+									<div class="card">
+										<div class="card-header">
+											<h3 class="card-title">Danh Công Nghệ</h3>
+											<div class="card-tools">
+												<a style="margin-bottom: 20px;" href="/admin/newDH"
+													class="btn btn-primary">Thêm Công Nghệ</a>
+											</div>
+											<div class="card-tools">
+												<div th:if="${success}"
+													class="row alert alert-success alert-dismissible">
+													<button type="button" class="close" data-dismiss="alert"
+														aria-label="Close">
+														<span aria-hidden="true">Ãƒâ€”</span>
+													</button>
+													<span th:text="${success}"></span>
+												</div>
+											</div>
+										</div>
+										<th:block th:if="${#lists.isEmpty(dieuhoas.pageList)}">
+											<h3>Không có sản phẩm nào</h3>
+										</th:block>
+										<th:block th:unless="${#lists.isEmpty(dieuhoas.pageList)}">
+											<div class="card-body table-responsive p-0"
+												style="height: 300px;">
+												<table class="table table-hover text-nowrap">
+													<thead>
+														<tr>
+															<th>ID</th>
+															<th>Tên</th>
+															<th>Ảnh</th>
+															<th>Giá</th>
+															<th>Sale</th>
+															<th>Số lượng</th>
+															<th>Ngày tạo</th>
+															<th>Ngày cập nhật</th>
+															<th>Action</th>
+															<th>Detail</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="dieuhoa : ${dieuhoas.pageList}">
+															<td th:text="${dieuhoa.id}"></td>
+															<td th:text="${dieuhoa.name}"></td>
+															<td><img alt=""
+																th:src="@{'/images/' + ${dieuhoa.fileImage}}"
+																style="width: 80px; heigh: 80px; border-radius: 50%; margin-left: 10px;"
+																class="image"></td>
+															<td th:text="${dieuhoa.price}"></td>
+															<td><span th:text="${dieuhoa.sale}"></span> <span>%</span></td>
+															<td th:text="${dieuhoa.quantity}"></td>
+															<td th:text="${dieuhoa.dateCreated}"></td>
+															<td th:text="${dieuhoa.lastUpdated}"></td>
+															<td><a
+																th:href="@{'/admin/dieuhoa/edit/' + ${dieuhoa.id}}"
+																class="btn btn-primary" style="margin-right: 10px;">Edit</a>
+																<a th:href="@{'/admin/deleteDH/' + ${dieuhoa.id}}"
+																class="confirm-delete"
+																onclick="return confirm('Báº¡n cÃ³ muá»‘n xÃ³a loáº¡i sáº£n pháº©m nÃ y khÃ´ng')">
+																	<i class="fa fa-trash"
+																	style="font-size: 21px; color: red;"></i>
+															</a></td>
+															<td><a
+																th:href="@{'/admin/dieuhoa/detail/' + ${dieuhoa.id}}"
+																class="btn btn-primary" style="margin-right: 10px;">Detail</a></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<ul class="pagination">
+												<li
+													th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
+													<a class="page-link" th:href="@{/admin/dieuhoa/page/1}">First</a>
+												</li>
+												<li
+													th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">
+													<a class="page-link" aria-label="Previous"
+													th:href="@{|${baseUrl}${currentIndex - 1}|}"
+													title='Go to previous page'><span aria-hidden="true"><i
+															class="fas fa-angle-double-left"></i></span> <span
+														class="sr-only">Previous</span></a>
+												</li>
+												<li
+													th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
+													th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
+													<a class="page-link" th:href="@{|${baseUrl}${item}|}">
+														<span th:text='${item}'>1</span>
+												</a>
+												</li>
+												<li
+													th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
+													<a class="page-link" aria-label="Next"
+													th:href="@{|${baseUrl}${currentIndex + 1}|}"
+													title='Go to next page'><span aria-hidden="true"><i
+															class="fas fa-angle-double-right"></i></span> <span
+														class="sr-only">Next</span></a>
+												</li>
+												<li
+													th:class="${currentIndex == totalPageCount}? 'page-item disabled':'page-item'">
+													<a class="page-link"
+													th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>
+												</li>
+											</ul>
+										</th:block>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/fragments/main_layout}">
+<head>
+<style type="text/css">
+.style-dieuhoa {
+	float: left;
+}
+</style>
+</head>
+<body>
+	<div class="content-wrapper" layout:fragment="content">
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0 text-dark">Dashboard</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="/admin/">Home</a></li>
+							<li class="breadcrumb-item active">Dashboard v1</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="row">
+								<div class="col-12">
+									<div class="card">
+										<div class="card-body table-responsive p-0"
+											style="height: 300px;">
+											<table class="table table-striped thongsodieuhoa">
+												<thead>
+													<tr>
+														<th>#</th>
+														<th style="color: #E53333;">Điều Hòa <span
+															th:text="${dieuhoa.name}"></span></th>
+														<th style="color: #E53333;">Thông Số</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>1</td>
+														<td>Tên</td>
+														<td th:text="${dieuhoa.name}"></td>
+													</tr>
+													<tr>
+														<td>2</td>
+														<td>Mã sản phẩm</td>
+														<td th:text="${dieuhoa.codeSp}"></td>
+													</tr>
+													<tr>
+														<td>3</td>
+														<td>Giá</td>
+														<td><span th:text="${#numbers.formatDecimal(dieuhoa.price,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>3</td>
+														<td>Phần trăm khuyến mãi</td>
+														<td><span th:text="${dieuhoa.sale}"></span><span> %</span></td>
+													</tr>
+													<tr>
+														<td>4</td>
+														<td>Thương hiệu</td>
+														<td th:text="${dieuhoa.thuongHieu.tenTH}"></td>
+													</tr>
+													<tr>
+														<td>5</td>
+														<td>Công nghệ</td>
+														<td th:text="${dieuhoa.congNghe.name}"></td>
+													</tr>
+													<tr>
+														<td>6</td>
+														<td>Loại máy</td>
+														<td th:text="${dieuhoa.loaiMay.name}"></td>
+													</tr>
+													<tr>
+														<td>7</td>
+														<td>Loại sản phẩm</td>
+														<td th:text="${dieuhoa.loaiSanPham.name}"></td>
+													</tr>
+													<tr>
+														<td>8</td>
+														<td>Ảnh đại diện</td>
+														<td><img alt=""
+															th:src="@{'/images/' + ${dieuhoa.fileImage}}"
+															style="width: 50px; heigh: 50px; border-radius: 50%; margin-left: 10px;"
+															class="image"></td>
+													</tr>
+													<tr>
+														<td>8</td>
+														<td>Ảnh liên quan</td>
+														<td><span th:each="file , itrStat : ${productfiles}"
+															class="iamgecontainer"
+															th:id="'imageindex' + ${itrStat.index}"> <img
+																alt="" th:src="@{'/images/' + ${file.fileName}}"
+																style="width: 50px; heigh: 50px; border-radius: 50%; margin-left: 10px;"
+																class="image">
+														</span></td>
+													</tr>
+													<tr>
+														<td>9</td>
+														<td>Công suất làm lạnh</td>
+														<td th:text="${dieuhoa.congsuatlamlanh}"></td>
+													</tr>
+													<tr>
+														<td>10</td>
+														<td>Công suất sưởi ấp</td>
+														<td th:text="${dieuhoa.congsuatlamnong}"></td>
+													</tr>
+													<tr>
+														<td>11</td>
+														<td>Phạm vi làm lạnh hiệu quả</td>
+														<td th:text="${dieuhoa.phamvilamlanh}"></td>
+													</tr>
+													<tr>
+														<td>12</td>
+														<td>Công nghệ Inverter</td>
+														<td th:text="${dieuhoa.congNghe.name}"></td>
+													</tr>
+													<tr>
+														<td>13</td>
+														<td>Loại máy</td>
+														<td th:text="${dieuhoa.loaiMay.name}"></td>
+													</tr>
+													<tr>
+														<td>14</td>
+														<td>Công suất tiêu thụ trung bình</td>
+														<td th:text="${dieuhoa.congsuattieuthu}"></td>
+													</tr>
+													<tr>
+														<td>15</td>
+														<td>Tiện ích</td>
+														<td th:text="${dieuhoa.tienich}"></td>
+													</tr>
+													<tr>
+														<td>16</td>
+														<td>Chế độ tiết kiệm điện</td>
+														<td th:text="${dieuhoa.tietkiemdien}"></td>
+													</tr>
+													<tr>
+														<td>17</td>
+														<td>Lọc bụi, kháng khuẩn, khử mùi</td>
+														<td th:text="${dieuhoa.locbui}"></td>
+													</tr>
+													<tr>
+														<td>18</td>
+														<td>Chế độ làm lạnh nhanh</td>
+														<td th:text="${dieuhoa.lamlanhnhanh}"></td>
+													</tr>
+													<tr>
+														<td>19</td>
+														<td>Chế độ gió</td>
+														<td th:text="${dieuhoa.chedogio}"></td>
+													</tr>
+													<tr>
+														<td>20</td>
+														<td>Thông tin cục lạnh</td>
+														<td th:text="${dieuhoa.ttcuclanh}"></td>
+													</tr>
+													<tr>
+														<td>21</td>
+														<td>Độ ồn trung bình của dàn lạnh/dàn nóng</td>
+														<td th:text="${dieuhoa.ttcucnong}"></td>
+													</tr>
+													<tr>
+														<td>22</td>
+														<td>Phạm vi làm lạnh hiệu quả</td>
+														<td th:text="${dieuhoa.doon}"></td>
+													</tr>
+													<tr>
+														<td>23</td>
+														<td>Chất liệu dàn tản nhiệt</td>
+														<td th:text="${dieuhoa.chatlieudantannhiet}"></td>
+													</tr>
+													<tr>
+														<td>24</td>
+														<td>Loại Gas</td>
+														<td th:text="${dieuhoa.loaigas}"></td>
+													</tr>
+													<tr>
+														<td>25</td>
+														<td>Chiều dài lắp đặt ống đồng</td>
+														<td th:text="${dieuhoa.chieudaiongdong}"></td>
+													</tr>
+													<tr>
+														<td>26</td>
+														<td>Chiều cao lắp đặt tối đa giữa cục nóng-lạnh</td>
+														<td th:text="${dieuhoa.chieucaomax}"></td>
+													</tr>
+													<tr>
+														<td>27</td>
+														<td>Nơi lắp ráp</td>
+														<td th:text="${dieuhoa.noilaprap}"></td>
+													</tr>
+													<tr>
+														<td>28</td>
+														<td>Năm ra mắt</td>
+														<td th:text="${dieuhoa.namsanxuat}"></td>
+													</tr>
+													<tr>
+														<td>29</td>
+														<td>Dòng điện vào</td>
+														<td>Dàn lạnh</td>
+													</tr>
+													<tr>
+														<td>30</td>
+														<td>Kích thước ống đồng</td>
+														<td>Tùy theo</td>
+													</tr>
+													<tr>
+														<td>31</td>
+														<td>Thương Hiệu</td>
+														<td th:text="${dieuhoa.thuongHieu.tenTH}"></td>
+													</tr>
+													<tr>
+														<td>32</td>
+														<td>Thời gian bảo hành</td>
+														<td th:text="${dieuhoa.baohanh}"></td>
+													</tr>
+													<tr>
+														<td>33</td>
+														<td>Mô tả sản phẩm</td>
+														<td th:text="${dieuhoa.description}"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+</body>
+</html>

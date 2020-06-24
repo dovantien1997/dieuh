@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/main_layout}">
+<head>
+<meta charset='UTF-8'>
+</head>
+<body>
+	<div class="main-content categories categories-grid1"
+		layout:fragment="content" style="background-color: #F5F5F5"
+		data-background-color="#F5F5F5">
+		<div class="container">
+			<div class="categories-page">
+				<div class="row">
+					<div class="content col-md-9 has-sidebar-left">
+						<div class="banner-categories-grid">
+							<img src="assets/images/bn-blog.jpg" alt="banner" height="175"
+								width="868">
+						</div>
+						<div class="categories-grid">
+							<div class="breadcrumb-sidebar">
+								<div class="breadcrumb-wrap">
+									<nav class="breadcrumb-trail breadcrumbs">
+										<ul class="trail-items">
+											<li class="trail-item trail-begin"><a href="#"><span>Home</span></a>
+											</li>
+											<li class="trail-item trail-end"><span>Electronic</span>
+											</li>
+										</ul>
+									</nav>
+								</div>
+							</div>
+							<div class="panel-categories">
+								<div class="row">
+									<div class="col-md-3">
+										<div class="view-categories">
+											<div class="click-grid color-active">
+												<i class="flaticon-four-grid-layout-design-interface-symbol"></i>
+											</div>
+											<div class="click-list">
+												<i
+													class="flaticon-squares-gallery-grid-layout-interface-symbol"></i>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6"></div>
+									<div class="col-md-3">
+										<div class="page-nav">
+											<th:block th:unless="${#lists.isEmpty(products.pageList)}">
+												<ul class="pagination">
+													<li
+														th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
+														<a class="page-link" th:href="@{/products/page/1}">First</a>
+													</li>
+													<li
+														th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">
+														<a class="page-link" aria-label="Previous"
+														th:href="@{|${baseUrl}${currentIndex - 1}|}"
+														title='Go to previous page'><i
+															class="fa fa-angle-left" aria-hidden="true"></i> <span
+															class="sr-only">Previous</span></a>
+													</li>
+													<li
+														th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
+														th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
+														<a class="page-link" th:href="@{|${baseUrl}${item}|}">
+															<span th:text='${item}'>1</span>
+													</a>
+													</li>
+													<li
+														th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
+														<a class="page-link" aria-label="Next"
+														th:href="@{|${baseUrl}${currentIndex + 1}|}"
+														title='Go to next page'><i class="fa fa-angle-right"
+															aria-hidden="true"></i> <span class="sr-only">Next</span></a>
+													</li>
+													<li
+														th:class="${currentIndex == totalPageCount}? 'page-item disabled':'page-item'">
+														<a class="page-link"
+														th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>
+													</li>
+												</ul>
+											</th:block>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="products-categories"></div>
+							<div class="panel-categories">
+								<div class="row">
+									<div class="col-md-3"></div>
+									<div class="col-md-6"></div>
+									<div class="col-md-3">
+										<div class="page-nav">
+											<th:block th:unless="${#lists.isEmpty(products.pageList)}">
+												<ul class="pagination">
+													<li
+														th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
+														<a class="page-link" th:href="@{/products/page/1}">First</a>
+													</li>
+													<li
+														th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">
+														<a class="page-link" aria-label="Previous"
+														th:href="@{|${baseUrl}${currentIndex - 1}|}"
+														title='Go to previous page'><i
+															class="fa fa-angle-left" aria-hidden="true"></i> <span
+															class="sr-only">Previous</span></a>
+													</li>
+													<li
+														th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
+														th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
+														<a class="page-link" th:href="@{|${baseUrl}${item}|}">
+															<span th:text='${item}'>1</span>
+													</a>
+													</li>
+													<li
+														th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
+														<a class="page-link" aria-label="Next"
+														th:href="@{|${baseUrl}${currentIndex + 1}|}"
+														title='Go to next page'><i class="fa fa-angle-right"
+															aria-hidden="true"></i> <span class="sr-only">Next</span></a>
+													</li>
+													<li
+														th:class="${currentIndex == totalPageCount}? 'page-item disabled':'page-item'">
+														<a class="page-link"
+														th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>
+													</li>
+												</ul>
+											</th:block>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="sidebar col-md-3">
+						<div class="breadcrumb-sidebar">
+							<div class="breadcrumb-wrap">
+								<nav class="breadcrumb-trail breadcrumbs">
+									<ul class="trail-items">
+										<li class="trail-item trail-begin"><a href="#"><span>Home</span></a>
+										</li>
+										<li class="trail-item trail-end"><span>Electronic</span>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+						<div class="sidebar-categories">
+							<div class="shop-sidebar">
+								<div class="sidebar-title">Shop By</div>
+								<div class="shop-sidebar-content">
+									<div class="categories-sidebar">
+										<div class="sidebar-title-section">Loại Sản Phẩm</div>
+										<div class="categories-checkbox">
+											<ul class="categories-list-wrap"
+												th:each="loaisp  : ${loaisanphams}">
+												<li><input type="checkbox" class="common_selector lsp"
+													th:id="'lsp' + ${loaisp.id}" th:value="${loaisp.id}"><label
+													th:for="'lsp' + ${loaisp.id}" th:text="${loaisp.name}"></label></li>
+											</ul>
+										</div>
+									</div>
+									<div class="price-sidebar">
+										<div class="sidebar-title-section">Lọc Giá</div>
+										<div class="categories-checkbox">
+											<ul class="brands">
+												<li><input class="common_selector price" type="radio"
+													name="price" id="1tr" value="1000000"><label
+													for="1tr">1 Triệu - 5 Triệu</label></li>
+												<li><input class="common_selector price" type="radio"
+													name="price" id="5tr" value="5000000"><label
+													for="5tr">5 Triệu - 10 Triệu</label></li>
+												<li><input class="common_selector price" type="radio"
+													name="price" id="10tr" value="10000000"><label
+													for="10tr">10 Triệu - 20 Triệu</label></li>
+												<li><input class="common_selector price" type="radio"
+													name="price" id="20tr" value="20000000"><label
+													for="20tr">20 Triệu - 30 Triệu</label></li>
+												<li><input class="common_selector price" type="radio"
+													name="price" id="30tr" value="30000000"><label
+													for="30tr">Hơn 30 Triệu</label></li>
+											</ul>
+										</div>
+									</div>
+									<div class="manufacture-sidebar">
+										<div class="sidebar-title-section">Thương Hiệu</div>
+										<div class="categories-checkbox">
+											<ul class="brands" th:each="thuonghieu : ${thuonghieus}">
+												<li><input class="common_selector thuongh"
+													th:id="'th' + ${thuonghieu.id}" type="checkbox"
+													th:value="${thuonghieu.id}"><label
+													th:for="'th' + ${thuonghieu.id}"
+													th:text="${thuonghieu.tenTH}"></label></li>
+											</ul>
+										</div>
+									</div>
+									<div class="manufacture-sidebar">
+										<div class="sidebar-title-section">Số Chiều</div>
+										<div class="categories-checkbox">
+											<ul class="brands" th:each="loaimay : ${loaimays}">
+												<li><input class="common_selector loaim"
+													th:id="'lm' + ${loaimay.id}" type="checkbox"
+													th:value="${loaimay.id}"><label
+													th:for="'lm' + ${loaimay.id}" th:text="${loaimay.name}"></label></li>
+											</ul>
+										</div>
+									</div>
+									<div class="manufacture-sidebar">
+										<div class="sidebar-title-section">Công Nghệ</div>
+										<div class="categories-checkbox">
+											<ul class="brands" th:each="congnghe : ${congnghes}">
+												<li><input class="common_selector congnghe"
+													th:id="'cn' + ${congnghe.id}" type="checkbox"
+													th:value="${congnghe.id}"><label
+													th:for="'cn' + ${congnghe.id}" th:text="${congnghe.name}"></label></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="compare-sidebar">
+								<div class="sidebar-title">Compare Products</div>
+								<div class="compare-sidebar-content">You Have No Item
+									Compare</div>
+							</div>
+							<div class="bestseller-sidebar">
+								<div class="sidebar-title">Sản Phẩm HOT</div>
+								<div class="bestseller-sidebar">
+									<ul class="bestseller-list">
+										<li class="bestseller-item"><a href="#"><img
+												src="assets/images/sb-cat1.jpg" alt="sb" height="130"
+												width="112"></a>
+											<div class="bestseller-content">
+												<a href="#" class="bestseller-text">Washing Machine Pro</a>
+												<span>$1000.00</span>
+											</div></li>
+									</ul>
+								</div>
+							</div>
+							<div class="tag-sidebar">
+								<div class="sidebar-title-section">Các thương hiệu</div>
+								<ul class="tag-list-sidebar">
+									<li class="tag-sidebar-item" th:each="th : ${thuonghieus}"><a
+										href="#" th:text="${th.tenTH}">Mobile</a></li>
+								</ul>
+								<a href="#" class="view-all-tags">View All Tags<i
+									class="fa fa-caret-right" aria-hidden="true"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="section-icon-box">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="icon-box style1">
+								<div class="row">
+									<div class="col-md-4">
+										<i class="flaticon-umbrella"></i>
+									</div>
+									<div class="col-md-8">
+										<div class="icon-box-content">
+											<h4>Buyer Protection</h4>
+											<p>Secure payments Guaranteed refunds Escrow protection
+												on every oder</p>
+											<a href="#">Read More<i class="fa fa-angle-double-right"
+												aria-hidden="true"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="icon-box style1">
+								<div class="row">
+									<div class="col-md-4">
+										<i class="flaticon-return-of-investment"></i>
+									</div>
+									<div class="col-md-8">
+										<div class="icon-box-content">
+											<h4>RETURN & EXCHANGE</h4>
+											<p>Wholesale products from certified Worldwide shipping
+												Low prices from US $0.1</p>
+											<a href="#">Read More<i class="fa fa-angle-double-right"
+												aria-hidden="true"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="icon-box style1">
+								<div class="row">
+									<div class="col-md-4">
+										<i class="flaticon-transport"></i>
+									</div>
+									<div class="col-md-8">
+										<div class="icon-box-content">
+											<h4>FREE DELIVERY</h4>
+											<p>Wholesale products from certified Worldwide shipping
+												Low prices from US $0.1</p>
+											<a href="#">Read More<i class="fa fa-angle-double-right"
+												aria-hidden="true"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/main_layout}">
+<head>
+
+<style type="text/css">
+.equal-elem {
+	float: left;
+}
+</style>
+</head>
+
+<body class="body-color-blue" data-main-color="#0b2076">
+
+	<!-- End .banner -->
+	<div class="main-content" layout:fragment="content">
+		<section id="section33">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="icon-box style4">
+							<div class="icon-box-left">
+								<i class="flaticon-transport"></i>
+							</div>
+							<div class="icon-box-right">
+								<h4>
+									<a href="#" data-color="#3374a6"><span>Giao Hàng Tận
+											Nhà</span></a>
+								</h4>
+								<p>Miễn phí nội thành Hà Nội</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="icon-box style4">
+							<div class="icon-box-left">
+								<i class="flaticon-shield"></i>
+							</div>
+							<div class="icon-box-right">
+								<h4>
+									<a href="#" data-color="#3374a6"><span>Bảo Hành
+											Chính Hãng</span> </a>
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="icon-box style4">
+							<div class="icon-box-left">
+								<i class="flaticon-dollar-symbol"></i>
+							</div>
+							<div class="icon-box-right">
+								<h4>
+									<a href="#" data-color="#3374a6"><span>Giá Rẻ Nhất</span></a>
+								</h4>
+								<p>Giá cả cạnh tranh</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="icon-box style4">
+							<div class="icon-box-left">
+								<i class="flaticon-24-hours-support"></i>
+							</div>
+							<div class="icon-box-right">
+								<h4>
+									<a href="#" data-color="#3374a6"><span>Tư Vấn</span> 24/7</a>
+								</h4>
+								<p>Hotline : 901234567</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="calltoaction">
+			<div class="container">
+				<div class="call-to-action text-center">
+					Sale. Save up to 40% online and in store. <a href="#">Shop all
+						deals Now <i class="fa fa-angle-double-right"></i>
+					</a>
+				</div>
+			</div>
+		</section>
+		<section id="banner-home5">
+			<div class="container">
+				<div class="banner-slide-with-cate">
+					<div class="row">
+						<div class="col-sm-3">
+							<a href="#categories-menu"
+								class="menu-button categories-menu-button"> Categories<span
+								class="flaticon-bars"></span>
+							</a>
+							<nav class="menu-item has-mega-menu" id="categories-menu">
+								<ul class="menu">
+									<li class="menu-item"><a href="#">Danh Mục Sản Phẩm</a> <span
+										class="click-categories flaticon-bars"></span>
+										<div class="category-drop-list">
+											<div class="category-drop-list-inner">
+												<ul class="sub-menu sub-menu-open">
+													<th:block th:each="loaisanpham : ${loaisanphams}">
+														<li class="menu-item"><a href="#"><i
+																class="flaticon-atom"></i><span
+																th:text="${loaisanpham.name}"></span></a></li>
+													</th:block>
+												</ul>
+												<span class="more-categories open-cate">Tất Cả</span>
+											</div>
+										</div></li>
+								</ul>
+							</nav>
+						</div>
+						<div class="col-sm-9 padding-left5">
+							<div class="supermartket-owl-carousel banner-slide nav-style3"
+								data-number="1" data-margin="0" data-navcontrol="yes"
+								data-dots="yes">
+								<th:block th:each="image : ${images880}">
+									<div class="item-slide">
+										<img th:src="'/images/'+${image.fileImage}" alt="banner-img">
+									</div>
+								</th:block>
+							</div>
+							<!-- Hot Deals Slide-->
+							<div class="host-deals-slide host-deals-slide-style-2">
+								<div class="item-deal" th:each="hotdeal : ${hotdeals}">
+									<div class="row">
+										<div class="col-sm-5 padding-right0">
+											<div class="hot-deal-count">
+												<h3 class="title-deal">Hot Sale Sản Phẩm</h3>
+												<div class="hot-deal-countdown">
+													<div class="countdown-time"
+														th:data-countdown="${hotdeal.timeSale}"></div>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-7 ">
+											<div class="hot-deal-product">
+												<div class="product-media">
+													<figure>
+														<a th:href="@{'/product/' + ${hotdeal.id}}"><img
+															style="width: 117px; height: 139px;"
+															th:src="@{'/images/' + ${hotdeal.fileImage}}" alt=""></a>
+													</figure>
+												</div>
+												<div class="product-info">
+													<h4 class="title-product">
+														<a href="#" th:text="${hotdeal.name}"></a>
+													</h4>
+													<div class="deal-info">
+														<div class="price">
+															<p>Chỉ Từ</p>
+															<span th:text="${hotdeal.price}"></span>
+															<p class="deal-in-on">Deal is on</p>
+														</div>
+														<a th:href="'/addCheckout/'+ ${hotdeal.id}"
+															class="deal-link">Mua Ngay</a>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End .Hot Deals Slide -->
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="section34">
+			<div class="container">
+				<div class="categories-slide-wrap">
+					<h4 class="tab-title">CÁC SẢN PHẨM HOT</h4>
+					<div class="categories-slide supermartket-owl-carousel nav-style2"
+						data-number="5" data-margin="10" data-navcontrol="yes"
+						data-dots="no" data-autoplay="yes">
+						<div class="category-item" th:each="hotdeal : ${hotdeals}">
+							<div class="category-media">
+								<figure>
+									<a th:href="@{'/product/' + ${hotdeal.id}}"><img
+										style="width: 202px; height: 239px;"
+										th:src="@{'/images/' + ${hotdeal.fileImage}}" alt=""></a>
+								</figure>
+							</div>
+							<div class="category-info">
+								<h5 class="cat-name">
+									<a th:href="@{'/product/' + ${hotdeal.id}}"
+										th:text="${hotdeal.name}"></a>
+								</h5>
+								<span class="cat-sku" th:text="${hotdeal.codeSp}"></span>
+								<p class="cat-desc">
+									Giá Bán : <span
+										th:class="${hotdeal.sale > 0}?'sale-price':'price'"
+										th:text="${#numbers.formatDecimal(hotdeal.price,0,'COMMA', 0, 'POINT')}"></span>
+									<span th:if="${hotdeal.sale > 0}"><span
+										th:class="${hotdeal.sale > 0}?'sale-sale'"
+										th:text="${#numbers.formatDecimal(hotdeal.price - hotdeal.price*hotdeal.sale/100,0,'COMMA', 0, 'POINT')}"></span></span>
+									đ
+								</p>
+								<a href="#" class="cat-link">Chi Tiết</a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<section id="section35">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="banner-text wow zoomIn" data-wow-delay="0.2s">
+							<figure>
+								<a href="#"><img src="assets/images/bn-text11.jpg" alt=""></a>
+							</figure>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="banner-text wow zoomIn" data-wow-delay="0.2s">
+							<figure>
+								<a href="#"><img src="assets/images/bn-text12.jpg" alt=""></a>
+							</figure>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="section36"
+			th:each="thuonghieu , itrStat : ${thuonghieus}">
+			<div class="container">
+				<div
+					th:class="'product-tabs product-tabs-style4 product-tabs-color' + ${itrStat.index +1}">
+					<h4 class="tab-title" th:text="${thuonghieu.tenTH}"></h4>
+					<ul class="nav nav-pills">
+						<li class="active"><a th:href="'#tab1' + ${thuonghieu.id}"
+							data-toggle="tab">Tất Cả</a></li>
+						<li><a th:href="'#tab2' + ${thuonghieu.id}" data-toggle="tab">Sản
+								Phẩm Sale</a></li>
+						<li><a th:href="'#tab3' + ${thuonghieu.id}" data-toggle="tab">Sản
+								Phẩm Mới</a></li>
+						<li><a th:href="'#tab4' + ${thuonghieu.id}" data-toggle="tab">Máy
+								Một Chiều</a></li>
+						<li><a th:href="'#tab5' + ${thuonghieu.id}" data-toggle="tab">Máy
+								Hai Chiều</a></li>
+					</ul>
+					<div
+						class="product-tabs-content tab-content clearfix equal-container">
+						<div class="tab-pane active" th:id="'tab1' + ${thuonghieu.id}">
+							<div class="supermartket-owl-carousel" data-number="5"
+								data-margin="0" data-navcontrol="yes" data-dots="yes">
+								<th:block th:each="dieuhoa : ${dieuHoas2}">
+									<th:block th:if="${dieuhoa.thuongHieu.id == thuonghieu.id}">
+										<div class="product-list-content equal-elem">
+
+											<div class="product-media">
+												<figure>
+													<a th:href="@{'/product/' + ${dieuhoa.id}}"><img
+														style="width: 202px; height: 239px;"
+														th:src="@{'/images/' + ${dieuhoa.fileImage}}" alt=""></a>
+												</figure>
+											</div>
+											<a th:href="@{'/product/' + ${dieuhoa.id}}"
+												class="title-slide-name"><span th:text="${dieuhoa.name}"></span></a>
+											<p class="codesp">
+												( <span th:text="${dieuhoa.codeSp}"></span> )
+											</p>
+											<p class="congnghe-sochieu">
+												Công Nghệ : <span th:text="${dieuhoa.congNghe.name}"></span>
+											</p>
+											<p class="congnghe-sochieu">
+												Số Chiều : <span th:text="${dieuhoa.loaiMay.name}"></span>
+											</p>
+											<div class="feature-slide-cost">
+												<p class="cat-desc">
+													<span th:class="${dieuhoa.sale > 0}?'sale-price':'price'"><span
+														th:text="${#numbers.formatDecimal(dieuhoa.price,0,'COMMA', 0, 'POINT')}"></span>đ</span>
+													<span th:if="${dieuhoa.sale > 0}"><span
+														th:class="${dieuhoa.sale > 0}?'sale-sale'"><span
+															th:text="${#numbers.formatDecimal(dieuhoa.price - dieuhoa.price*dieuhoa.sale/100,0,'COMMA', 0, 'POINT')}"></span>đ</span></span>
+												</p>
+											</div>
+											<ul class="product-item-actions">
+												<li><a href="#"><i class="flaticon-like"></i></a></li>
+												<li><a href="#"><i class="flaticon-arrows"></i></a></li>
+												<li><a th:href="@{'/addProduct/' + ${dieuhoa.id}}"><i
+														class="flaticon-commerce"></i></a></li>
+											</ul>
+
+										</div>
+									</th:block>
+								</th:block>
+							</div>
+						</div>
+						<div class="tab-pane" th:id="'tab4' + ${thuonghieu.id}">
+							<div class="supermartket-owl-carousel" data-number="5"
+								data-margin="0" data-navcontrol="yes">
+								<th:block th:each="dieuhoa : ${dieuHoas2}">
+									<th:block
+										th:if="${dieuhoa.thuongHieu.id == thuonghieu.id && dieuhoa.loaiMay.id == 57}">
+										<div class="product-list-content equal-elem">
+
+											<div class="product-media">
+												<figure>
+													<a th:href="@{'/product/' + ${dieuhoa.id}}"><img
+														style="width: 202px; height: 239px;"
+														th:src="@{'/images/' + ${dieuhoa.fileImage}}" alt=""></a>
+												</figure>
+											</div>
+											<a th:href="@{'/product/' + ${dieuhoa.id}}"
+												class="title-slide-name"><span th:text="${dieuhoa.name}"></span></a>
+											<p class="codesp">
+												( <span th:text="${dieuhoa.codeSp}"></span> )
+											</p>
+											<p class="congnghe-sochieu">
+												Công Nghệ : <span th:text="${dieuhoa.congNghe.name}"></span>
+											</p>
+											<p class="congnghe-sochieu">
+												Số Chiều : <span th:text="${dieuhoa.loaiMay.name}"></span>
+											</p>
+											<div class="feature-slide-cost">
+												<p class="cat-desc">
+													<span th:class="${dieuhoa.sale > 0}?'sale-price':'price'"><span
+														th:text="${#numbers.formatDecimal(dieuhoa.price,0,'COMMA', 0, 'POINT')}"></span>đ</span>
+													<span th:if="${dieuhoa.sale > 0}"><span
+														th:class="${dieuhoa.sale > 0}?'sale-sale'"><span
+															th:text="${#numbers.formatDecimal(dieuhoa.price - dieuhoa.price*dieuhoa.sale/100,0,'COMMA', 0, 'POINT')}"></span>đ</span></span>
+												</p>
+											</div>
+											<ul class="product-item-actions">
+												<li><a href="#"><i class="flaticon-like"></i></a></li>
+												<li><a href="#"><i class="flaticon-arrows"></i></a></li>
+												<li><a th:href="@{'/addProduct/' + ${dieuhoa.id}}"><i
+														class="flaticon-commerce"></i></a></li>
+											</ul>
+
+										</div>
+									</th:block>
+								</th:block>
+							</div>
+						</div>
+						<div class="tab-pane" th:id="'tab5' + ${thuonghieu.id}">
+							<div class="supermartket-owl-carousel" data-number="5"
+								data-margin="0" data-navcontrol="yes" data-dots="yes">
+								<th:block th:each="dieuhoa : ${dieuHoas2}">
+									<th:block
+										th:if="${dieuhoa.thuongHieu.id == thuonghieu.id && dieuhoa.loaiMay.id == 58}">
+										<div class="product-list-content equal-elem">
+
+											<div class="product-media">
+												<figure>
+													<a th:href="@{'/product/' + ${dieuhoa.id}}"><img
+														style="width: 202px; height: 239px;"
+														th:src="@{'/images/' + ${dieuhoa.fileImage}}" alt=""></a>
+												</figure>
+											</div>
+											<a th:href="@{'/product/' + ${dieuhoa.id}}"
+												class="title-slide-name"><span th:text="${dieuhoa.name}"></span></a>
+											<p class="codesp">
+												( <span th:text="${dieuhoa.codeSp}"></span> )
+											</p>
+											<p class="congnghe-sochieu">
+												Công Nghệ : <span th:text="${dieuhoa.congNghe.name}"></span>
+											</p>
+											<p class="congnghe-sochieu">
+												Số Chiều : <span th:text="${dieuhoa.loaiMay.name}"></span>
+											</p>
+											<div class="feature-slide-cost">
+												<p class="cat-desc">
+													<span th:class="${dieuhoa.sale > 0}?'sale-price':'price'"><span
+														th:text="${#numbers.formatDecimal(dieuhoa.price,0,'COMMA', 0, 'POINT')}"></span>đ</span>
+													<span th:if="${dieuhoa.sale > 0}"><span
+														th:class="${dieuhoa.sale > 0}?'sale-sale'"><span
+															th:text="${#numbers.formatDecimal(dieuhoa.price - dieuhoa.price*dieuhoa.sale/100,0,'COMMA', 0, 'POINT')}"></span>đ</span></span>
+												</p>
+											</div>
+											<ul class="product-item-actions">
+												<li><a href="#"><i class="flaticon-like"></i></a></li>
+												<li><a href="#"><i class="flaticon-arrows"></i></a></li>
+												<li><a th:href="@{'/addProduct/' + ${dieuhoa.id}}"><i
+														class="flaticon-commerce"></i></a></li>
+											</ul>
+
+										</div>
+									</th:block>
+								</th:block>
+							</div>
+						</div>
+						<div class="tab-pane" th:id="'tab2' + ${thuonghieu.id}">
+							<div class="supermartket-owl-carousel" data-number="5"
+								data-margin="0" data-navcontrol="yes" data-dots="yes">
+								<th:block th:each="dieuhoa : ${dieuHoas2}">
+									<th:block
+										th:if="${dieuhoa.thuongHieu.id == thuonghieu.id && dieuhoa.sale > 0}">
+										<div class="product-list-content equal-elem">
+
+											<div class="product-media">
+												<figure>
+													<a th:href="@{'/product/' + ${dieuhoa.id}}"><img
+														style="width: 202px; height: 239px;"
+														th:src="@{'/images/' + ${dieuhoa.fileImage}}" alt=""></a>
+												</figure>
+											</div>
+											<a th:href="@{'/product/' + ${dieuhoa.id}}"
+												class="title-slide-name"><span th:text="${dieuhoa.name}"></span></a>
+											<p class="codesp">
+												( <span th:text="${dieuhoa.codeSp}"></span> )
+											</p>
+											<p class="congnghe-sochieu">
+												Công Nghệ : <span th:text="${dieuhoa.congNghe.name}"></span>
+											</p>
+											<p class="congnghe-sochieu">
+												Số Chiều : <span th:text="${dieuhoa.loaiMay.name}"></span>
+											</p>
+											<div class="feature-slide-cost">
+												<p class="cat-desc">
+													<span th:class="${dieuhoa.sale > 0}?'sale-price':'price'"><span
+														th:text="${#numbers.formatDecimal(dieuhoa.price,0,'COMMA', 0, 'POINT')}"></span>đ</span>
+													<span th:if="${dieuhoa.sale > 0}"><span
+														th:class="${dieuhoa.sale > 0}?'sale-sale'"><span
+															th:text="${#numbers.formatDecimal(dieuhoa.price - dieuhoa.price*dieuhoa.sale/100,0,'COMMA', 0, 'POINT')}"></span>đ</span></span>
+												</p>
+											</div>
+											<ul class="product-item-actions">
+												<li><a href="#"><i class="flaticon-like"></i></a></li>
+												<li><a href="#"><i class="flaticon-arrows"></i></a></li>
+												<li><a th:href="@{'/addProduct/' + ${dieuhoa.id}}"><i
+														class="flaticon-commerce"></i></a></li>
+											</ul>
+
+										</div>
+									</th:block>
+								</th:block>
+							</div>
+						</div>
+						<div class="tab-pane" th:id="'tab3' + ${thuonghieu.id}">
+							<div class="supermartket-owl-carousel" data-number="5"
+								data-margin="0" data-navcontrol="yes" data-dots="yes">
+								<th:block th:each="dieuhoa : ${dieuHoas2}">
+									<th:block
+										th:if="${dieuhoa.thuongHieu.id == thuonghieu.id && dieuhoa.namsanxuat == 'Model 2020'}">
+										<div class="product-list-content equal-elem">
+
+											<div class="product-media">
+												<figure>
+													<a th:href="@{'/product/' + ${dieuhoa.id}}"><img
+														style="width: 202px; height: 239px;"
+														th:src="@{'/images/' + ${dieuhoa.fileImage}}" alt=""></a>
+												</figure>
+											</div>
+											<a th:href="@{'/product/' + ${dieuhoa.id}}"
+												class="title-slide-name"><span th:text="${dieuhoa.name}"></span></a>
+											<p class="codesp">
+												( <span th:text="${dieuhoa.codeSp}"></span> )
+											</p>
+											<p class="congnghe-sochieu">
+												Công Nghệ : <span th:text="${dieuhoa.congNghe.name}"></span>
+											</p>
+											<p class="congnghe-sochieu">
+												Số Chiều : <span th:text="${dieuhoa.loaiMay.name}"></span>
+											</p>
+											<div class="feature-slide-cost">
+												<p class="cat-desc">
+													<span th:class="${dieuhoa.sale > 0}?'sale-price':'price'"><span
+														th:text="${#numbers.formatDecimal(dieuhoa.price,0,'COMMA', 0, 'POINT')}"></span>đ</span>
+													<span th:if="${dieuhoa.sale > 0}"><span
+														th:class="${dieuhoa.sale > 0}?'sale-sale'"><span
+															th:text="${#numbers.formatDecimal(dieuhoa.price - dieuhoa.price*dieuhoa.sale/100,0,'COMMA', 0, 'POINT')}"></span>đ</span></span>
+												</p>
+											</div>
+											<ul class="product-item-actions">
+												<li><a href="#"><i class="flaticon-like"></i></a></li>
+												<li><a href="#"><i class="flaticon-arrows"></i></a></li>
+												<li><a th:href="@{'/addProduct/' + ${dieuhoa.id}}"><i
+														class="flaticon-commerce"></i></a></li>
+											</ul>
+
+										</div>
+									</th:block>
+								</th:block>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--end product tab home 3-->
+		</section>
+		<section id="section38">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div data-wow-delay="0.6s" class="banner-text wow zoomIn">
+							<figure>
+								<a href="#"><img alt="" src="assets/images/bn-text-13.jpg"></a>
+							</figure>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div data-wow-delay="0.6s" class="banner-text wow zoomIn">
+							<figure>
+								<a href="#"><img alt="" src="assets/images/bn-text14.jpg"></a>
+							</figure>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="section41">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div data-wow-delay="0.6s" class="banner-text wow zoomIn">
+							<figure>
+								<a href="#"><img alt="" src="assets/images/bn-text15.jpg"></a>
+							</figure>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div data-wow-delay="0.6s" class="banner-text wow zoomIn">
+							<figure>
+								<a href="#"><img alt="" src="assets/images/bn-text16.jpg"></a>
+							</figure>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="section42">
+			<div class="container">
+				<!-- Title Block -->
+				<div class="title-block title-block-style2">
+					<h5 class="title-left">From The Blog</h5>
+				</div>
+				<!-- End Title Block -->
+				<div class="lastes-news lastes-news-style2 lastes-news-slide">
+					<div class="supermartket-owl-carousel" data-number="3"
+						data-margin="30" data-navcontrol="yes">
+						<div class="latest-content">
+							<div class="lastest-media">
+								<figure>
+									<a href="#"><img src="assets/images/blog51.jpg"
+										alt="latest" width="370" height="204"></a>
+								</figure>
+								<div class="post-date-item">
+									<p class="post-date">28</p>
+									<span class="post-month">dec</span>
+								</div>
+							</div>
+							<div class="latest-text">
+								<div class="lastet-content">
+									<h5 class="title-post">
+										<a href="#">Claritas est etiam Prosessus</a>
+									</h5>
+									<ul class="post-meta">
+										<li class="meta-item">By: <a href="#">Kutethemes</a>
+										</li>
+										<li class="meta-item"><i class="fa fa-comment"></i> 368 <a
+											href="#">Comment</a></li>
+									</ul>
+									<div class="desc-post">Lorem ipsum dolor sit amet,
+										consectetur adipiscing elit [...]</div>
+									<a class="post-link" href="#">Read more<i
+										class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="latest-content">
+							<div class="lastest-media">
+								<figure>
+									<a href="#"><img src="assets/images/blog52.jpg"
+										alt="latest" width="370" height="204"></a>
+								</figure>
+								<div class="post-date-item">
+									<p class="post-date">27</p>
+									<span class="post-month">dec</span>
+								</div>
+							</div>
+							<div class="latest-text">
+								<div class="lastet-content">
+									<h5 class="title-post">
+										<a href="#">Claritas est etiam Prosessus</a>
+									</h5>
+									<ul class="post-meta">
+										<li class="meta-item">By: <a href="#">Kutethemes</a>
+										</li>
+										<li class="meta-item"><i class="fa fa-comment"></i> 368 <a
+											href="#">Comment</a></li>
+									</ul>
+									<div class="desc-post">Lorem ipsum dolor sit amet,
+										consectetur adipiscing elit [...]</div>
+									<a class="post-link" href="#">Read more<i
+										class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="latest-content">
+							<div class="lastest-media">
+								<figure>
+									<a href="#"><img src="assets/images/blog53.jpg"
+										alt="latest" width="370" height="204"></a>
+								</figure>
+								<div class="post-date-item">
+									<p class="post-date">27</p>
+									<span class="post-month">dec</span>
+								</div>
+							</div>
+							<div class="latest-text">
+								<div class="lastet-content">
+									<h5 class="title-post">
+										<a href="#">Claritas est etiam Prosessus</a>
+									</h5>
+									<ul class="post-meta">
+										<li class="meta-item">By: <a href="#">Kutethemes</a>
+										</li>
+										<li class="meta-item"><i class="fa fa-comment"></i> 368 <a
+											href="#">Comment</a></li>
+									</ul>
+									<div class="desc-post">Lorem ipsum dolor sit amet,
+										consectetur adipiscing elit [...]</div>
+									<a class="post-link" href="#">Read more<i
+										class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="latest-content">
+							<div class="lastest-media">
+								<figure>
+									<a href="#"><img src="assets/images/blog51.jpg"
+										alt="latest" width="370" height="204"></a>
+								</figure>
+								<div class="post-date-item">
+									<p class="post-date">27</p>
+									<span class="post-month">dec</span>
+								</div>
+							</div>
+							<div class="latest-text">
+								<div class="lastet-content">
+									<h5 class="title-post">
+										<a href="#">Claritas est etiam Prosessus</a>
+									</h5>
+									<ul class="post-meta">
+										<li class="meta-item">By: <a href="#">Kutethemes</a>
+										</li>
+										<li class="meta-item"><i class="fa fa-comment"></i> 368 <a
+											href="#">Comment</a></li>
+									</ul>
+									<div class="desc-post">Lorem ipsum dolor sit amet,
+										consectetur adipiscing elit [...]</div>
+									<a class="post-link" href="#">Read more<i
+										class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--end slide-latest-news-->
+			</div>
+		</section>
+	</div>
+
+	<!--end footer-->
+
+</body>
+</html>

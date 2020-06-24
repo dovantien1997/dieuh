@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/main_layout}">
+<head>
+<meta charset='UTF-8'>
+</head>
+<body class="checkout-page">
+	<div class="main-content container" layout:fragment="content">
+		<div class="row">
+			<form th:action="@{'/checkoutorder'}" method="post">
+				<div class="col-md-9">
+					<p class="title-left">Check Out</p>
+					<div class="check-1 checkout-box">
+						<div class="check-out-click">
+							<span>1</span>Thông Tin Hóa Đơn
+						</div>
+						<div class="check-method-content checkout-toggle">
+							<div class="row">
+								<div class="div-table-cart">
+									<table class="shop_table cart">
+										<thead>
+											<tr>
+												<th class="product-thumbnail">&nbsp;</th>
+												<th class="product-name">Tên Sản Phẩm</th>
+												<th class="product-edit">Mã Sản Phẩm</th>
+												<th class="product-price">Giá</th>
+												<th class="product-quantity">Số Lượng</th>
+												<th class="product-subtotal">Tổng</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="cart_item" th:each="item : ${session.cart}">
+												<td class="product-thumbnail" data-title=""><a href="#"><img
+														height="100" width="140" alt="s_c"
+														class="attachment-shop_thumbnail wp-post-image"
+														th:src="@{'/images/' + ${item.product.fileImage}}"></a></td>
+												<td class="product-name" data-title="Product Name"><a
+													href="#"><span th:text="${item.product.name}"></span></a></td>
+												<td class="edit"><a href="#"><span
+														th:text="${item.product.codeSp}"></span></a></td>
+												<td class="product-price" data-title="Unit Price"><span
+													class="amount"><span th:text="${item.product.price}"></span></span>
+												</td>
+												<td class="product-quantity" data-title="Qty"><span
+													class="amount"><span th:text="${item.quantity}"></span></span>
+												</td>
+												<td class="product-subtotal" data-title="Subtotal"><span
+													class="amount"
+													th:text="${item.product.price*item.quantity}"></span></td>
+
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+								<div class="col-md-4">
+									<div class="cart_totals cart-box">
+										<table>
+											<tbody>
+												<tr class="cart-subtotal">
+													<th>Tổng tiền:</th>
+													<td><span class="amount" th:text="${totalPrice}"></span></td>
+												</tr>
+												<tr class="grand">
+													<th>Phí vận chuyển:</th>
+													<td><span class="amount">1.000.000 đ</span></td>
+												</tr>
+												<tr class="grand">
+													<th>Tổng hóa đơn:</th>
+													<td><span class="amount" th:text="${totalPrice}"></span></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="check-2 checkout-box">
+						<div class="check-out-click">
+							<span>2</span>Địa Chỉ Nhận Hàng
+						</div>
+						<div class="check-method-content checkout-toggle"
+							style="display: none">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="method-content-left">
+										<div class="form-group">
+											<label class="col-form-label" for="fullName">Tên
+												Người Nhận</label> <input type="text" name="fullName"
+												class="form-control is-valid" id="fullName"
+												placeholder="VD : Nguyen Van A ...">
+										</div>
+										<div class="form-group">
+											<label class="col-form-label" for="email">Email</label> <input
+												type="email" name="email" class="form-control is-valid"
+												id="email"
+												placeholder="Nhập email nếu có vd :email@gmail.com">
+										</div>
+										<div class="form-group">
+											<label class="col-form-label" for="phone">Số Điện
+												Thoại</label> <input type="text" name="phone"
+												class="form-control is-valid" id="phone"
+												placeholder="Nhập số điện thoại vd:0901236868">
+										</div>
+										<div class="form-group">
+											<label class="col-form-label" for="city">Tỉnh hoặc
+												thành phố</label> <input type="text" class="form-control is-valid"
+												id="city" name="city" placeholder="VD : Hà Nội">
+										</div>
+										<div class="form-group">
+											<label class="col-form-label" for="district">Quận
+												huyện</label> <input type="text" class="form-control is-valid"
+												id="district" name="district" placeholder="VD : Hà Nội">
+										</div>
+										<div class="form-group">
+											<label>Địa Chỉ Nhận Hàng</label>
+											<textarea class="form-control" rows="3" name="deliveryAddress"
+												placeholder="VD : Số 1 Giải Phóng, quận Hai Bà Trưng ,thành phố Hà Nội"></textarea>
+										</div>
+										<div class="form-group">
+											<label>Ghi Chú Thêm</label>
+											<textarea class="form-control" rows="3" name="orderNotes"
+												placeholder="VD : khoảng thời gian có thể nhận hàng được trong ngày"></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="check-4 checkout-box">
+						<div class="check-out-click">
+							<span>3</span>Phương Thức Thanh Toán
+						</div>
+						<div class="check-method-content checkout-toggle"
+							style="display: none">
+							<div class="row">
+								<div class="col-md-7">
+									<div class="method-content-left">
+										<p>Giao hàng lắp đặt xong mới thanh toán</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<p class="check-title-right">Your Check Progress</p>
+					<div class="check-button">
+						<button class="button button-white">Thanh Toán</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div id="section-icon-box">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="icon-box style1">
+							<div class="row">
+								<div class="col-md-4">
+									<i class="flaticon-umbrella"></i>
+								</div>
+								<div class="col-md-8">
+									<div class="icon-box-content">
+										<h4>Buyer Protection</h4>
+										<p>Secure payments Guaranteed refunds Escrow protection on
+											every oder</p>
+										<a href="#">Read More<i aria-hidden="true"
+											class="fa fa-angle-double-right"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="icon-box style1">
+							<div class="row">
+								<div class="col-md-4">
+									<i class="flaticon-return-of-investment"></i>
+								</div>
+								<div class="col-md-8">
+									<div class="icon-box-content">
+										<h4>RETURN &amp; EXCHANGE</h4>
+										<p>Wholesale products from certified Worldwide shipping
+											Low prices from US $0.1</p>
+										<a href="#">Read More<i aria-hidden="true"
+											class="fa fa-angle-double-right"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="icon-box style1">
+							<div class="row">
+								<div class="col-md-4">
+									<i class="flaticon-transport"></i>
+								</div>
+								<div class="col-md-8">
+									<div class="icon-box-content">
+										<h4>FREE DELIVERY</h4>
+										<p>Wholesale products from certified Worldwide shipping
+											Low prices from US $0.1</p>
+										<a href="#">Read More<i aria-hidden="true"
+											class="fa fa-angle-double-right"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

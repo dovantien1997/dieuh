@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/fragments/main_layout}">
+<head>
+
+</head>
+<body>
+	<div class="content-wrapper" layout:fragment="content">
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0 text-dark">Dashboard</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="/admin/">Home</a></li>
+							<li class="breadcrumb-item active">Dashboard v1</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="row">
+								<div class="col-12">
+									<div class="card">
+										<div class="card-header">
+											<h3 class="card-title">Danh Công Nghệ</h3>
+											<div class="card-tools">
+												<button style="margin-bottom: 20px"
+													class="btn btn-primary nCN">Thêm Công Nghệ</button>
+											</div>
+											<div class="card-tools">
+												<div th:if="${success}"
+													class="row alert alert-success alert-dismissible">
+													<button type="button" class="close" data-dismiss="alert"
+														aria-label="Close">
+														<span aria-hidden="true">Ãƒâ€”</span>
+													</button>
+													<span th:text="${success}"></span>
+												</div>
+											</div>
+										</div>
+										<th:block th:if="${#lists.isEmpty(congnghes.pageList)}">
+											<h3>Không có công nghệ nào</h3>
+										</th:block>
+										<th:block th:unless="${#lists.isEmpty(congnghes.pageList)}">
+											<div class="card-body table-responsive p-0"
+												style="height: 300px;">
+												<table class="table table-head-fixed text-nowrap">
+													<thead>
+														<tr>
+															<th>ID</th>
+															<th>Tên công nghệ</th>
+															<th>Ngày tạo</th>
+															<th>Ngày cập nhật</th>
+															<th>Action</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="congnghe : ${congnghes.pageList}">
+															<td th:text="${congnghe.id}"></td>
+															<td th:text="${congnghe.name}"></td>
+															<td th:text="${congnghe.dateCreated}"></td>
+															<td th:text="${congnghe.lastUpdated}"></td>
+															<td><a th:href="@{edit/(id=${congnghe.id})}"
+																class="btn btn-primary eCN" style="margin-right: 10px;">Edit</a>
+																<a th:href="@{'/admin/deleteCN/' + ${congnghe.id}}"
+																class="confirm-delete"
+																onclick="return confirm('Báº¡n cÃ³ muá»‘n xÃ³a loáº¡i sáº£n pháº©m nÃ y khÃ´ng')">
+																	<i class="fa fa-trash"
+																	style="font-size: 21px; color: red;"></i>
+															</a></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<ul class="pagination">
+												<li
+													th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
+													<a class="page-link" th:href="@{/admin/congnghe/page/1}">First</a>
+												</li>
+												<li
+													th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">
+													<a class="page-link" aria-label="Previous"
+													th:href="@{|${baseUrl}${currentIndex - 1}|}"
+													title='Go to previous page'><span aria-hidden="true"><i
+															class="fas fa-angle-double-left"></i></span> <span
+														class="sr-only">Previous</span></a>
+												</li>
+												<li
+													th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
+													th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
+													<a class="page-link" th:href="@{|${baseUrl}${item}|}">
+														<span th:text='${item}'>1</span>
+												</a>
+												</li>
+												<li
+													th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
+													<a class="page-link" aria-label="Next"
+													th:href="@{|${baseUrl}${currentIndex + 1}|}"
+													title='Go to next page'><span aria-hidden="true"><i
+															class="fas fa-angle-double-right"></i></span> <span
+														class="sr-only">Next</span></a>
+												</li>
+												<li
+													th:class="${currentIndex == totalPageCount}? 'page-item disabled':'page-item'">
+													<a class="page-link"
+													th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>
+												</li>
+											</ul>
+										</th:block>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="myFormUpdate">
+			<form th:action="@{/admin/update/cn}" method="put">
+				<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
+					aria-labelledby="updateModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="updateModalLabel">Update công nghệ</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p class="alert alert-info">Nhập thông tin</p>
+								<div class="form-group">
+									<input type="hidden" class="form-control" id="id" name="id"
+										value="" />
+								</div>
+								<div class="form-group">
+									<input type=hidden class="form-control" id="dateCreated"
+										name="dateCreated" value="" />
+								</div>
+								<div class="form-group">
+									<label for="name" class="col-form-label">Tên công nghệ:</label> <input type="text" class="form-control" id="name"
+										name="name" value="" />
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Close</button>
+								<input type="submit" class="btn btn-primary" value="Update" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="myFormCreate">
+			<form th:action="@{/admin/save/cn}" method="post">
+				<div class="modal fade" id="myModalCreate" tabindex="-1"
+					role="dialog" aria-labelledby="modalLabelCreate" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="modalLabelCreate">Thêm công nghệ</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p class="alert alert-info">Nhập thông tin</p>
+
+								<div class="form-group">
+									<label for="name" class="col-form-label">Tên thương hiệu
+										:</label> <input type="text" class="form-control" id="name"
+										name="name" value="" />
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Close</button>
+								<input type="submit" class="btn btn-primary" value="Save" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

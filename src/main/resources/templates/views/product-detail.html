@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/main_layout}">
+<head>
+<meta charset='UTF-8'>
+</head>
+<body class="categories-page product-detail">
+	<div class="categories main-content" layout:fragment="content">
+		<div class="container">
+			<div class="breadcrumb-sidebar">
+				<div class="breadcrumb-wrap">
+					<nav class="breadcrumb-trail breadcrumbs">
+						<ul class="trail-items">
+							<li class="trail-item trail-begin"><a href="#"><span>Home</span></a>
+							</li>
+							<li class="trail-item trail-end"><span>Electronic</span></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<div class="product-box product-box-primary">
+				<div class="product-box-content">
+					<div class="row">
+						<div class="col-md-5">
+							<div class="tab-content clearfix">
+								<div class="tab-pane active" th:id="1image0">
+									<figure class="img-product">
+										<img style="height: 400px; width: 467px;"
+											th:src="@{'/images/' + ${dieuhoa.fileImage}}" alt="product">
+										<div class="img-room">
+											<img th:src="@{'/images/' + ${dieuhoa.fileImage}}" alt="room"
+												height="32" width="32">
+										</div>
+									</figure>
+								</div>
+								<th:block th:each="file , itrStat : ${productfiles}">
+									<div class="tab-pane" th:id="'1image' + ${itrStat.index +1}">
+										<figure class="img-product">
+											<img style="height: 400px; width: 467px;"
+												th:src="@{'/images/' + ${file.fileName}}" alt="product">
+											<div class="img-room">
+												<img th:src="@{'/images/' + ${file.fileName}}" alt="room"
+													height="32" width="32">
+											</div>
+										</figure>
+									</div>
+								</th:block>
+							</div>
+							<div class="featue-slide supermartket-owl-carousel"
+								data-number="3" data-margin="15" data-navcontrol="yes">
+								<div class="feature-slide-item active">
+									<figure>
+										<a href="#1image0" data-toggle="tab"><img
+											th:src="@{'/images/' + ${dieuhoa.fileImage}}" alt="feature"
+											width="126" height="143"> </a>
+									</figure>
+								</div>
+								<div class="feature-slide-item"
+									th:each="file , itrStat : ${productfiles}">
+									<figure>
+										<a th:href="'#1image' + ${itrStat.index + 1}"
+											data-toggle="tab"><img
+											th:src="@{'/images/' + ${file.fileName}}" alt="feature"
+											width="126" height="143"> </a>
+									</figure>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-7">
+							<div class="single-product-content">
+								<h3
+									style="text-transform: uppercase; color: #3a5795; font: bold 23px/35px Tahoma, Arial;"
+									class="product-title" th:text="${dieuhoa.name}"></h3>
+								<h4 class="write" th:text="${dieuhoa.codeSp}"></h4>
+								<p class="product-cost">
+									Giá : <span
+										th:class="${dieuhoa.sale > 0}?'sale-price-detail':'price-detail'"
+										th:text="${#numbers.formatDecimal(dieuhoa.price,0,'COMMA', 0, 'POINT')}"></span>
+									<span th:class="${dieuhoa.sale > 0}?'sale-price-d':'d-sale'">đ</span>
+								</p>
+								<p class="product-cost" th:if="${dieuhoa.sale > 0}">
+									Sale : <span class="price-detail"
+										th:text="${#numbers.formatDecimal(dieuhoa.price - dieuhoa.price*dieuhoa.sale/100,0,'COMMA', 0, 'POINT')}"></span>
+									<span class="d-sale">đ</span>
+								</p>
+								<p class="stock">
+									TRẠNG THÁI:<span><i class="fa fa-check-square-o"
+										aria-hidden="true"></i>Còn hàng</span>
+								</p>
+								<div class="desc-product">
+									<div class="col-sm-3 row mota">Máy</div>
+									<div class="col-sm-9 mota">
+										:<span th:text="${dieuhoa.loaiMay.name}" class="chitiet"></span>
+									</div>
+								</div>
+								<div class="desc-product">
+									<div class="col-sm-3 row mota">Công Nghệ</div>
+									<div class="col-sm-9 mota">
+										:<span th:text="${dieuhoa.congNghe.name}" class="chitiet"></span>
+									</div>
+								</div>
+								<div class="desc-product">
+									<div class="col-sm-3 row mota">Nơi Láp Ráp</div>
+									<div class="col-sm-9 mota">
+										:<span th:text="${dieuhoa.noilaprap}" class="chitiet"></span>
+									</div>
+								</div>
+								<div class="desc-product">
+									<div class="col-sm-3 row mota">Bảo Hành</div>
+									<div class="col-sm-9 mota">
+										:<span th:text="${dieuhoa.baohanh}" class="chitiet"></span>
+									</div>
+								</div>
+								<div class="desc-product col-sm-12 row">
+									<p class="online">Mua online tuyến hoặc gọi ngay 0968686868
+									</p>
+								</div>
+
+								<div class="product-box-bottom">
+									<form th:action="@{'/addProduct/'}" method="GET">
+										<div class="quanlity-product">
+											<span>Qty:</span>
+											<div class="quantity buttons_added">
+												<input type="hidden" name="id" th:value="${dieuhoa.id}">
+												<a class="sign minus" href="#"><i class="fa fa-minus"
+													aria-hidden="true"></i></a> <input type="text" size="1"
+													class="input-text qty text" name="quantity" title="Qty"
+													value="1"> <a class="sign plus" href="#"><i
+													class="fa fa-plus" aria-hidden="true"></i></a>
+											</div>
+										</div>
+										<div class="button-detail">
+											<button class="add-to-cart">
+												<i class="flaticon-commerce"></i>Add To Cart
+											</button>
+											<a href="#" class="wishlist"><i class="flaticon-like"></i></a>
+											<a th:href="'/addCheckout/' + ${dieuhoa.id}" class=""><i class="flaticon-arrows"></i>Mua
+												Ngay</a>
+										</div>
+									</form>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="detail-products product-tabs">
+				<ul class="nav nav-pills">
+					<li class="active"><a href="#1a" data-toggle="tab">Mô Tả
+							Sản Phẩm</a></li>
+					<li><a href="#2a" data-toggle="tab">Thông Số Kỹ Thuật</a></li>
+					<li><a href="#3a" data-toggle="tab">Bảng Giá Lắp Đặt</a></li>
+					<li><a href="#4a" data-toggle="tab">Chat Ngay (24/7)</a></li>
+				</ul>
+				<div class="product-tabs-content tab-content clearfix">
+					<div class="tab-pane active" id="1a"></div>
+					<div class="tab-pane" id="2a">
+						<div class="tagcloud">
+							<table class="table table-striped thongsodieuhoa">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th style="color: #E53333;">Điều Hòa <span
+											th:text="${dieuhoa.name}"></span></th>
+										<th style="color: #E53333;">Thông Số</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td>Công suất làm lạnh</td>
+										<td th:text="${dieuhoa.congsuatlamlanh}"></td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>Công suất sưởi ấp</td>
+										<td th:text="${dieuhoa.congsuatlamnong}"></td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>Phạm vi làm lạnh hiệu quả</td>
+										<td th:text="${dieuhoa.phamvilamlanh}"></td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>Công nghệ Inverter</td>
+										<td th:text="${dieuhoa.congNghe.name}"></td>
+									</tr>
+									<tr>
+										<td>5</td>
+										<td>Loại máy</td>
+										<td th:text="${dieuhoa.loaiMay.name}"></td>
+									</tr>
+									<tr>
+										<td>6</td>
+										<td>Công suất tiêu thụ trung bình</td>
+										<td th:text="${dieuhoa.congsuattieuthu}"></td>
+									</tr>
+									<tr>
+										<td>7</td>
+										<td>Tiện ích</td>
+										<td th:text="${dieuhoa.tienich}"></td>
+									</tr>
+									<tr>
+										<td>8</td>
+										<td>Chế độ tiết kiệm điện</td>
+										<td th:text="${dieuhoa.tietkiemdien}"></td>
+									</tr>
+									<tr>
+										<td>9</td>
+										<td>Lọc bụi, kháng khuẩn, khử mùi</td>
+										<td th:text="${dieuhoa.locbui}"></td>
+									</tr>
+									<tr>
+										<td>10</td>
+										<td>Chế độ làm lạnh nhanh</td>
+										<td th:text="${dieuhoa.lamlanhnhanh}"></td>
+									</tr>
+									<tr>
+										<td>11</td>
+										<td>Chế độ gió</td>
+										<td th:text="${dieuhoa.chedogio}"></td>
+									</tr>
+									<tr>
+										<td>12</td>
+										<td>Thông tin cục lạnh</td>
+										<td th:text="${dieuhoa.ttcuclanh}"></td>
+									</tr>
+									<tr>
+										<td>13</td>
+										<td>Độ ồn trung bình của dàn lạnh/dàn nóng</td>
+										<td th:text="${dieuhoa.ttcucnong}"></td>
+									</tr>
+									<tr>
+										<td>14</td>
+										<td>Phạm vi làm lạnh hiệu quả</td>
+										<td th:text="${dieuhoa.doon}"></td>
+									</tr>
+									<tr>
+										<td>15</td>
+										<td>Chất liệu dàn tản nhiệt</td>
+										<td th:text="${dieuhoa.chatlieudantannhiet}"></td>
+									</tr>
+									<tr>
+										<td>16</td>
+										<td>Loại Gas</td>
+										<td th:text="${dieuhoa.loaigas}"></td>
+									</tr>
+									<tr>
+										<td>17</td>
+										<td>Chiều dài lắp đặt ống đồng</td>
+										<td th:text="${dieuhoa.chieudaiongdong}"></td>
+									</tr>
+									<tr>
+										<td>18</td>
+										<td>Chiều cao lắp đặt tối đa giữa cục nóng-lạnh</td>
+										<td th:text="${dieuhoa.chieucaomax}"></td>
+									</tr>
+									<tr>
+										<td>19</td>
+										<td>Nơi lắp ráp</td>
+										<td th:text="${dieuhoa.noilaprap}"></td>
+									</tr>
+									<tr>
+										<td>20</td>
+										<td>Năm ra mắt</td>
+										<td th:text="${dieuhoa.namsanxuat}"></td>
+									</tr>
+									<tr>
+										<td>21</td>
+										<td>Dòng điện vào</td>
+										<td>Dàn lạnh</td>
+									</tr>
+									<tr>
+										<td>22</td>
+										<td>Kích thước ống đồng</td>
+										<td>Tùy theo</td>
+									</tr>
+									<tr>
+										<td>23</td>
+										<td>Thương Hiệu</td>
+										<td th:text="${dieuhoa.thuongHieu.tenTH}"></td>
+									</tr>
+									<tr>
+										<td>24</td>
+										<td>Thời gian bảo hành</td>
+										<td th:text="${dieuhoa.baohanh}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="tab-pane" id="3a">
+						<table class="table table-striped thongsodieuhoa">
+							<thead>
+								<tr>
+									<th rowspan="2"
+										style="vertical-align: middle; text-align: center;">#</th>
+									<th rowspan="2"
+										style="color: #E53333; vertical-align: middle; text-align: center;">Bảng
+										Giá Lắp Đặt Điều Hòa (Vật Tư)</th>
+									<th rowspan="2"
+										style="color: #E53333; vertical-align: middle; text-align: center;">DVT</th>
+									<th rowspan="2"
+										style="color: #E53333; vertical-align: middle; text-align: center;">Số
+										Lượng</th>
+									<th style="color: #E53333; text-align: center;">Đơn Giá
+										(VNĐ)</th>
+								</tr>
+								<tr>
+									<th style="color: #E53333; text-align: center;">Chưa (VAT)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>Ống đồng máy treo tường Công suất 9.000BTU</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>Ống đồng máy treo tường Công suất 12.000BTU</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>Ống đồng máy treo tường Công suất 18.000BTU</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>4</td>
+									<td>Ống đồng máy treo tường Công suất 24.000BTU</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>5</td>
+									<td>Ống đồng máy âm trần, tủ 18.000 – 24.000BTU</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>6</td>
+									<td>Ống đồng máy âm trần, tủ 28.000 – 30.000BTU</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>7</td>
+									<td>Ống đồng máy âm trần, tủ 36.000 – 50.000BTU</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>8</td>
+									<td>Loại máy treo tường Công suất 9.000BTU-12.000BTU</td>
+									<td>Bộ</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>9</td>
+									<td>Loại máy treo tường Công suất 18.000BTU-24.000BTU</td>
+									<td>Bộ</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>10</td>
+									<td>Công suất 9.000BTU-12.000BTU</td>
+									<td>Bộ</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>11</td>
+									<td>Công suất 18.000BTU-24000BTU</td>
+									<td>Bộ</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>12</td>
+									<td>Công lắp đặt máy tủ, âm trần 18.000 – 30.000BTU</td>
+									<td>Bộ</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>13</td>
+									<td>Công lắp đặt máy tủ, âm trần 36.000 – 50.000BTU</td>
+									<td>Bộ</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>14</td>
+									<td>Dây điện 2×1.5mm</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>15</td>
+									<td>Dây điện 2×2.5mm</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>16</td>
+									<td>Dây điện 2×4 mm</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>17</td>
+									<td>Dây cáp nguồn 3×4+1×2,5mm</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>18</td>
+									<td>Ống thoát nước mềm</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>19</td>
+									<td>Ống thoát nước cứng PVC Ø21</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>20</td>
+									<td>Ống thoát nước cứng PVC Ø21 + Bảo ôn</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>21</td>
+									<td>Attomat 1 pha</td>
+									<td>Cái</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>22</td>
+									<td>Nhân công đục tường đi ống gas, ống nước âm tường</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>23</td>
+									<td>Vật tư phụ (băng dính, que hàn, đai, ốc vít, bu
+										lông..)</td>
+									<td>Bộ</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>24</td>
+									<td>Kiểm tra, chỉnh sửa đường ống đã đi sẵn</td>
+									<td>Bộ</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>25</td>
+									<td>Chi phí thang dây</td>
+									<td>Bộ</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>26</td>
+									<td>Phí dải đường ống (Trường hợp khách cấp vật tư)</td>
+									<td>Mét</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>II</td>
+									<td colspan="4">Đơn giá lắp đặt bình nước nóng</td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>Công lắp đặt</td>
+									<td>Bộ</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>Ống dẫn</td>
+									<td>Đôi</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>Bộ phụ kiện</td>
+									<td>Bộ</td>
+									<td>1</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="tab-pane" id="4a">
+						<p>Cum altera mandamus in, mea verear disputationi et. Vel
+							regione discere ut, legere expetenda ut eos. In nam nibh invenire
+							similique. Atqui mollis ea his, ius graecis accommodare te. No
+							eam tota nostrum cotidieque. Est cu nibh clita. Sed an nominavi
+							maiestatis, et duo corrumpit constituto, duo id rebum lucilius.
+							Te eam iisque deseruisse, ipsum euismod his at. Eu putent habemus
+							voluptua sit, sit cu rationibus scripserit, modus voluptaria ex
+							per. Aeque dicam consulatu eu his,</p>
+					</div>
+					<div class="tab-pane" id="5a">
+						<div class="tagcloud">
+							<a href="#">Cotton</a> <a href="#">Leggings</a> <a href="#">Men</a>
+							<a href="#">Shirt</a> <a href="#">T-shirt</a> <a href="#">COSMETIC</a>
+							<a href="#">SOFT WEAR</a> <a href="#">ACCESSORIES</a> <a href="#">LIFE
+								STYLE</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="detail-slide relates">
+				<h3 class="title-detail-slide">Sản Phẩm Liên Quan</h3>
+				<div class="supermartket-owl-carousel" data-number="5"
+					data-margin="30" data-navcontrol="yes">
+					<div class="product-box"
+						th:each="dieuhoalienquan : ${dieuhoalienquans}">
+						<div class="product-box-content">
+							<figure class="img-product">
+								<img th:src="@{'/images/' + ${dieuhoalienquan.fileImage}}"
+									alt="product" height="207" width="175">
+								<a th:href="@{'/product/' + ${dieuhoalienquan.id}}"
+									class="flaticon-search"></a>
+							</figure>
+							<div class="product-box-text">
+								<a th:href="@{'/product/' + ${dieuhoalienquan.id}}"
+									class="product-name" th:text="${dieuhoalienquan.name}"></a>
+								<p class="product-cost">
+									<span th:class="${dieuhoa.sale > 0}?'sale-price':'price'"><span
+										th:text="${#numbers.formatDecimal(dieuhoalienquan.price,0,'COMMA', 0, 'POINT')}"></span>đ</span>
+									<span th:if="${dieuhoa.sale > 0}"><span
+										th:class="${dieuhoa.sale > 0}?'sale-sale'"><span
+											th:text="${#numbers.formatDecimal(dieuhoalienquan.price - dieuhoalienquan.price*dieuhoalienquan.sale/100,0,'COMMA', 0, 'POINT')}"></span>đ</span></span>
+								</p>
+								<div class="product-box-bottom">
+									<a href="#" class="add-to-cart"><i
+										class="flaticon-commerce"></i>Add To Cart</a> <a href="#"
+										class="wishlist"><i class="flaticon-like"></i></a> <a href="#"
+										class="refresh-product"><i class="flaticon-arrows"></i></a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="detail-slide upsales">
+				<h3 class="title-detail-slide">Sản Phẩm Đang Sale</h3>
+				<div class="supermartket-owl-carousel" data-number="5"
+					data-margin="30" data-navcontrol="yes">
+					<div class="product-box" th:each="hotdeal : ${hotdeals}">
+						<div class="product-box-content">
+							<figure class="img-product">
+								<img th:src="@{'/images/' + ${hotdeal.fileImage}}" alt="product"
+									height="207" width="175">
+								<a th:href="@{'/product/' + ${hotdeal.id}}"
+									class="flaticon-search"></a>
+							</figure>
+							<div class="product-box-text">
+								<a th:href="@{'/product/' + ${hotdeal.id}}" class="product-name"
+									th:text="${hotdeal.name}"></a>
+								<p class="product-cost">
+									<span th:class="${dieuhoa.sale > 0}?'sale-price':'price'"><span
+										th:text="${#numbers.formatDecimal(hotdeal.price,0,'COMMA', 0, 'POINT')}"></span>đ</span>
+									<span th:if="${dieuhoa.sale > 0}"><span
+										th:class="${dieuhoa.sale > 0}?'sale-sale'"><span
+											th:text="${#numbers.formatDecimal(hotdeal.price - hotdeal.price*hotdeal.sale/100,0,'COMMA', 0, 'POINT')}"></span>đ</span></span>
+								</p>
+								<div class="product-box-bottom">
+									<a href="#" class="add-to-cart"><i
+										class="flaticon-commerce"></i>Add To Cart</a> <a href="#"
+										class="wishlist"><i class="flaticon-like"></i></a> <a href="#"
+										class="refresh-product"><i class="flaticon-arrows"></i></a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="section-icon-box">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="icon-box style1">
+								<div class="row">
+									<div class="col-md-4">
+										<i class="flaticon-umbrella"></i>
+									</div>
+									<div class="col-md-8">
+										<div class="icon-box-content">
+											<h4>Buyer Protection</h4>
+											<p>Secure payments Guaranteed refunds Escrow protection
+												on every oder</p>
+											<a href="#">Read More<i aria-hidden="true"
+												class="fa fa-angle-double-right"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="icon-box style1">
+								<div class="row">
+									<div class="col-md-4">
+										<i class="flaticon-return-of-investment"></i>
+									</div>
+									<div class="col-md-8">
+										<div class="icon-box-content">
+											<h4>RETURN &amp; EXCHANGE</h4>
+											<p>Wholesale products from certified Worldwide shipping
+												Low prices from US $0.1</p>
+											<a href="#">Read More<i aria-hidden="true"
+												class="fa fa-angle-double-right"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="icon-box style1">
+								<div class="row">
+									<div class="col-md-4">
+										<i class="flaticon-transport"></i>
+									</div>
+									<div class="col-md-8">
+										<div class="icon-box-content">
+											<h4>FREE DELIVERY</h4>
+											<p>Wholesale products from certified Worldwide shipping
+												Low prices from US $0.1</p>
+											<a href="#">Read More<i aria-hidden="true"
+												class="fa fa-angle-double-right"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

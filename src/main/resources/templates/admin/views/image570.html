@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/fragments/main_layout}">
+<head>
+
+<style type="text/css">
+.iamgecontainer {
+	position: relative;
+	width: 100%;
+	max-width: 100%;
+}
+
+.overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: .3s ease;
+	border-radius: 50%;
+}
+
+.iamgecontainer:hover .overlay {
+	opacity: 1;
+}
+
+.icon {
+	color: white;
+	font-size: 40px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.fa-trash-alt {
+	color: red;
+}
+
+.style-dieuhoa {
+	float: left;
+}
+</style>
+</head>
+<body>
+	<div class="content-wrapper" layout:fragment="content">
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0 text-dark">Dashboard</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="/admin/">Home</a></li>
+							<li class="breadcrumb-item active">Dashboard v1</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="row">
+								<div class="col-12">
+									<div class="card">
+										<div class="myFormUpdate">
+											<form
+												th:action="@{${isAdd}?'/admin/save/image570':'/admin/update/image570'}"
+												method="POST" enctype="multipart/form-data"
+												th:object="${image570}">
+												<div class="col-sm-12">
+													<input type="hidden" name="id" id="id" th:field="*{id}"
+														value=""> <input type=hidden class="form-control"
+														th:field="*{dateCreated}" id="dateCreated"
+														name="dateCreated" value="" /> <input type=hidden
+														class="form-control" th:field="*{fileImage}"
+														id="fileImage" name="fileImage" value="" /> <input
+														type=hidden class="form-control" th:field="*{fileImage1}"
+														id="fileImage1" name="fileImage1" value="" />
+													<div class="col-sm-12 style-dieuhoa">
+														<div class="form-group row">
+															<label for="fileImage" class="col-sm-3 col-form-label">Ảnh
+																570 x 160 - ảnh 1</label>
+															<div class="col-sm-9">
+																<input type="file" class="form-control" name="file"
+																	th:field="*{file}"> <img alt=""
+																	th:src="@{'/images/' + ${image570.fileImage}}"
+																	style="width: 245px; heigh: 60px; margin-left: 10px;"
+																	class="image">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-12 style-dieuhoa">
+														<div class="form-group row">
+															<label for="fileImage1" class="col-sm-3 col-form-label">Ảnh
+																570 x 160 - ảnh 2</label>
+															<div class="col-sm-9">
+																<input type="file" class="form-control" name="file1"
+																	th:field="*{file1}"> <img alt=""
+																	th:src="@{'/images/' + ${image570.fileImage1}}"
+																	style="width: 245px; heigh: 60px; margin-left: 10px;"
+																	class="image">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-12 style-dieuhoa">
+														<div class="form-group row clearfix">
+															<label for="" class="col-sm-3 col-form-label">Hiển
+																thị lên web</label>
+															<div class="col-sm-9">
+																<input type="radio" id="status" name="r1" checked=""
+																	value="1" th:field="*{status}"> Hiển Thị <input
+																	type="radio" id="status" name="r1" checked="" value="0"
+																	th:field="*{status}"> Ẩn
+															</div>
+														</div>
+													</div>
+													<div class="modal-footer col-sm-12">
+														<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">Close</button>
+														<button type="submit" class="btn btn-primary"
+															th:text="${isAdd}?'Save':'Update'"></button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+</body>
+</html>

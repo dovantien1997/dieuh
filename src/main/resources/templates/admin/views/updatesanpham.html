@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/fragments/main_layout}">
+<head>
+
+<style type="text/css">
+.iamgecontainer {
+	position: relative;
+	width: 100%;
+	max-width: 100%;
+}
+
+.overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: .3s ease;
+	border-radius: 50%;
+}
+
+.iamgecontainer:hover .overlay {
+	opacity: 1;
+}
+
+.icon {
+	color: white;
+	font-size: 40px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.fa-trash-alt {
+	color: red;
+}
+
+.style-dieuhoa {
+	float: left;
+}
+</style>
+</head>
+<body>
+	<div class="content-wrapper" layout:fragment="content">
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0 text-dark">Dashboard</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="/admin/">Home</a></li>
+							<li class="breadcrumb-item active">Dashboard v1</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="row">
+								<div class="col-12">
+									<div class="card">
+										<div class="myFormUpdate">
+											<form
+												th:action="@{${isAdd}?'/admin/save/dh':'/admin/update/dh'}"
+												method="POST" enctype="multipart/form-data"
+												th:object="${dieuhoa}">
+												<div class="col-sm-12">
+													<input type="hidden" name="id" id="id" th:field="*{id}"
+														value=""> <input type=hidden class="form-control"
+														th:field="*{dateCreated}" id="dateCreated"
+														name="dateCreated" value="" /> <input type=hidden
+														class="form-control" th:field="*{fileImage}"
+														id="fileImage" name="fileImage" value="" />
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Thương
+																Hiệu</label>
+															<div class="col-sm-9">
+																<select class="custom-select" th:field="*{thuongHieu}">
+																	<option th:each="thuonghieu : ${thuonghieus}"
+																		th:value="${thuonghieu.id}"
+																		th:text="${thuonghieu.tenTH}"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Loại
+																Sản Phẩm</label>
+															<div class="col-sm-9">
+																<select class="custom-select" th:field="*{loaiSanPham}">
+																	<option th:each="loaisanpham : ${loaisanphams}"
+																		th:value="${loaisanpham.id}"
+																		th:text="${loaisanpham.name}" name="loaiSanPham"
+																		id="loaiSanPham"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Loại
+																Máy</label>
+															<div class="col-sm-9">
+																<select class="custom-select" th:field="*{loaiMay}">
+																	<option th:each="loaimay : ${loaimays}"
+																		th:value="${loaimay.id}" th:text="${loaimay.name}"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Công
+																Nghệ</label>
+															<div class="col-sm-9">
+																<select class="custom-select" th:field="*{congNghe}">
+																	<option th:each="congnghe : ${congnghes}"
+																		th:value="${congnghe.id}" th:text="${congnghe.name}"></option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Mã
+																Điều Hòa</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" name="codeSp"
+																	id="codeSp" th:field="*{codeSp}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row clearfix">
+															<label for="" class="col-sm-3 col-form-label">Hiển
+																thị quản cáo</label>
+															<div class="col-sm-9">
+																<input type="radio" name="q1" value="1"
+																	th:field="*{quangcao}"> Hiển Thị <input
+																	type="radio" name="q1" checked value="0"
+																	th:field="*{quangcao}"> Ẩn
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row clearfix">
+															<label for="" class="col-sm-3 col-form-label">Thời
+																gian Sale</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" name="time" th:field="*{timeSale}" placeholder="2020/4/22 00:00:00">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Tên
+																Điều Hòa</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" name="name"
+																	id="name" th:field="*{name}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="price" class="col-sm-3 col-form-label">Giá</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" name="price"
+																	id="price" th:field="*{price}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="price" class="col-sm-3 col-form-label">Sale
+																%</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" name="sale"
+																	id="sale" th:field="*{sale}" placeholder="Sale 20 %">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="fileImage" class="col-sm-3 col-form-label">Ảnh
+																Đại Diện</label>
+															<div class="col-sm-9">
+																<input type="file" class="form-control" name="file"
+																	th:field="*{file}"> <img alt=""
+																	th:src="@{'/images/' + ${dieuhoa.fileImage}}"
+																	style="width: 80px; heigh: 80px; border-radius: 50%; margin-left: 10px;"
+																	class="image">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="files" class="col-sm-3 col-form-label">Ảnh
+																Mô Tả</label>
+															<div class="col-sm-9">
+																<input type="file" class="form-control" id="files"
+																	placeholder="Upload files" name="files"
+																	th:field="*{files}" multiple="multiple"> <input
+																	type="hidden" th:field="*{removeImage}"
+																	id="removeImages" name="removeImage"
+																	multiple="multiple" />
+															</div>
+														</div>
+														<div class="form-group">
+															<span th:each="file , itrStat : ${productfiles}"
+																class="iamgecontainer"
+																th:id="'imageindex' + ${itrStat.index}"> <img
+																alt="" th:src="@{'/images/' + ${file.fileName}}"
+																style="width: 80px; heigh: 80px; border-radius: 50%; margin-left: 10px;"
+																class="image"> <span class="overlay"> <a
+																	href="#" class="icon image-confirm-delete"
+																	title="image delete"
+																	th:attr="data-id=${itrStat.index},data-name=${file.fileName}">
+																		<i class="fas fa-trash-alt"></i>
+																</a>
+															</span>
+															</span>
+
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Công
+																suất làm lạnh</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control"
+																	name="congsuatlamlanh" id="congsuatlamlanh"
+																	th:field="*{congsuatlamlanh}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Công
+																suất làm nóng</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control"
+																	name="congsuatlamnong" id="congsuatlamnong"
+																	th:field="*{congsuatlamnong}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Phạm
+																vi làm lạnh</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control"
+																	name="phamvilamlanh" id="phamvilamlanh"
+																	th:field="*{phamvilamlanh}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Công
+																suất tiêu thụ</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control"
+																	name="congsuattieuthu" id="congsuattieuthu"
+																	th:field="*{congsuattieuthu}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Tiện
+																ích</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" name="tienich"
+																	id="tienich" th:field="*{tienich}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Tiết
+																kiệm điện</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control"
+																	name="tietkiemdien" id="tietkiemdien"
+																	th:field="*{tietkiemdien}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Lọc
+																bụi</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" name="locbui"
+																	id="locbui" th:field="*{locbui}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Làm
+																lạnh nhanh</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control"
+																	name="lamlanhnhanh" id="lamlanhnhanh"
+																	th:field="*{lamlanhnhanh}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Chế
+																độ gió</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" name="chedogio"
+																	id="chedogio" th:field="*{chedogio}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Thông
+																tin cục lạnh</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" name="ttcuclanh"
+																	id="ttcuclanh" th:field="*{ttcuclanh}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Thông
+																tin cục nóng</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" name="ttcucnong"
+																	id="ttcucnong" th:field="*{ttcucnong}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Độ
+																ồn</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" name="doon"
+																	id="doon" th:field="*{doon}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Chất
+																liệu dàn tản nhiệt</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control"
+																	name="chatlieudantannhiet" id="chatlieudantannhiet"
+																	th:field="*{chatlieudantannhiet}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Loại
+																Gas</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" name="loaigas"
+																	id="loaigas" th:field="*{loaigas}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Chiều
+																dài ống đồng</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control"
+																	name="chieudaiongdong" id="chieudaiongdong"
+																	th:field="*{chieudaiongdong}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Chiều
+																cao Max</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control"
+																	name="chieucaomax" id="chieucaomax"
+																	th:field="*{chieucaomax}">
+															</div>
+														</div>
+													</div>
+
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Nơi
+																láp ráp</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" name="noilaprap"
+																	id="noilaprap" th:field="*{noilaprap}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Năm
+																sản xuất</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control"
+																	name="namsanxuat" id="namsanxuat"
+																	th:field="*{namsanxuat}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row">
+															<label for="" class="col-sm-3 col-form-label">Bảo
+																hành</label>
+															<div class="col-sm-9">
+																<input type="text" class="form-control" name="baohanh"
+																	id="baohanh" th:field="*{baohanh}">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 style-dieuhoa">
+														<div class="form-group row clearfix">
+															<label for="" class="col-sm-3 col-form-label">Hiển
+																thị lên web</label>
+															<div class="col-sm-9">
+																<input type="radio" name="status"
+																	value="1" th:field="*{status}" checked> Hiển Thị <input
+																	type="radio" name="status" value="0"
+																	th:field="*{status}"> Ẩn
+															</div>
+														</div>
+													</div>
+
+													<div class="col-sm-12 style-dieuhoa">
+														<div class="form-group row">
+															<label for="description" class="col-sm-3 col-form-label">Mô
+																tả sản phẩm</label>
+															<div class="col-sm-12">
+																<textarea rows="" cols="" id="editor"
+																	th:field="*{description}"></textarea>
+															</div>
+														</div>
+													</div>
+
+													<section class="content grid-width-70">
+
+														<div id="ckfinder-widget"></div>
+													</section>
+													<div class="modal-footer col-sm-12">
+														<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">Close</button>
+														<button type="submit" class="btn btn-primary"
+															th:text="${isAdd}?'Save':'Update'"></button>
+													</div>
+												</div>
+
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+</body>
+</html>

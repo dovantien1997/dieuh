@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/fragments/main_layout}">
+<head>
+<style type="text/css">
+.style-dieuhoa {
+	float: left;
+}
+</style>
+</head>
+<body>
+	<div class="content-wrapper" layout:fragment="content">
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0 text-dark">Dashboard</h1>
+					</div>
+					<!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="/admin/">Home</a></li>
+							<li class="breadcrumb-item active">Dashboard v1</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="row">
+								<div class="col-12">
+									<div class="card">
+										<div class="card-header">
+											<h3 class="card-title">Bảng Giá Lắp Đặt Điều Hòa</h3>
+											<div class="card-tools">
+												<a th:href="@{banggia/edit/(id=147)}"
+													class="btn btn-primary eBG" style="margin-right: 10px;">Edit</a>
+											</div>
+											<div class="card-tools">
+												<div th:if="${success}"
+													class="row alert alert-success alert-dismissible">
+													<button type="button" class="close" data-dismiss="alert"
+														aria-label="Close">
+														<span aria-hidden="true">Ãƒâ€”</span>
+													</button>
+													<span th:text="${success}"></span>
+												</div>
+											</div>
+										</div>
+										<div class="card-body table-responsive p-0"
+											style="height: 300px;">
+											<table class="table table-striped thongsodieuhoa">
+												<thead>
+													<tr>
+														<th rowspan="2"
+															style="vertical-align: middle; text-align: center;">#</th>
+														<th rowspan="2"
+															style="color: #E53333; vertical-align: middle; text-align: center;">Bảng
+															Giá Lắp Đặt Điều Hòa (Vật Tư)</th>
+														<th rowspan="2"
+															style="color: #E53333; vertical-align: middle; text-align: center;">DVT</th>
+														<th rowspan="2"
+															style="color: #E53333; vertical-align: middle; text-align: center;">Số
+															Lượng</th>
+														<th style="color: #E53333; text-align: center;">Đơn
+															Giá (VNĐ)</th>
+													</tr>
+													<tr>
+														<th style="color: #E53333; text-align: center;">Chưa
+															(VAT)</th>
+													</tr>
+												</thead>
+												<tbody>
+												<th:block th:each="banggia : ${banggias}">
+													<tr>
+														<td>1</td>
+														<td>Ống đồng máy treo tường Công suất 9.000BTU</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field1,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>2</td>
+														<td>Ống đồng máy treo tường Công suất 12.000BTU</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field2,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>3</td>
+														<td>Ống đồng máy treo tường Công suất 18.000BTU</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field3,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>4</td>
+														<td>Ống đồng máy treo tường Công suất 24.000BTU</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field4,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>5</td>
+														<td>Ống đồng máy âm trần, tủ 18.000 – 24.000BTU</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field5,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>6</td>
+														<td>Ống đồng máy âm trần, tủ 28.000 – 30.000BTU</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field6,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>7</td>
+														<td>Ống đồng máy âm trần, tủ 36.000 – 50.000BTU</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field7,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>8</td>
+														<td>Loại máy treo tường Công suất 9.000BTU-12.000BTU</td>
+														<td>Bộ</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field8,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>9</td>
+														<td>Loại máy treo tường Công suất 18.000BTU-24.000BTU</td>
+														<td>Bộ</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field9,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>10</td>
+														<td>Công suất 9.000BTU-12.000BTU</td>
+														<td>Bộ</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field10,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>11</td>
+														<td>Công suất 18.000BTU-24000BTU</td>
+														<td>Bộ</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field11,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>12</td>
+														<td>Công lắp đặt máy tủ, âm trần 18.000 – 30.000BTU</td>
+														<td>Bộ</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field12,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>13</td>
+														<td>Công lắp đặt máy tủ, âm trần 36.000 – 50.000BTU</td>
+														<td>Bộ</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field13,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>14</td>
+														<td>Dây điện 2×1.5mm</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field14,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>15</td>
+														<td>Dây điện 2×2.5mm</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field15,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>16</td>
+														<td>Dây điện 2×4 mm</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field16,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>17</td>
+														<td>Dây cáp nguồn 3×4+1×2,5mm</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field17,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>18</td>
+														<td>Ống thoát nước mềm</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field18,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>19</td>
+														<td>Ống thoát nước cứng PVC Ø21</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field19,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>20</td>
+														<td>Ống thoát nước cứng PVC Ø21 + Bảo ôn</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field20,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>21</td>
+														<td>Attomat 1 pha</td>
+														<td>Cái</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field21,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>22</td>
+														<td>Nhân công đục tường đi ống gas, ống nước âm tường</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field22,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>23</td>
+														<td>Vật tư phụ (băng dính, que hàn, đai, ốc vít, bu
+															lông..)</td>
+														<td>Bộ</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field23,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>24</td>
+														<td>Kiểm tra, chỉnh sửa đường ống đã đi sẵn</td>
+														<td>Bộ</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field24,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>25</td>
+														<td>Chi phí thang dây</td>
+														<td>Bộ</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field25,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>26</td>
+														<td>Phí dải đường ống (Trường hợp khách cấp vật tư)</td>
+														<td>Mét</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field26,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>II</td>
+														<td colspan="4">Đơn giá lắp đặt bình nước nóng</td>
+													</tr>
+													<tr>
+														<td>1</td>
+														<td>Công lắp đặt</td>
+														<td>Bộ</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field27,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>2</td>
+														<td>Ống dẫn</td>
+														<td>Đôi</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field28,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													<tr>
+														<td>3</td>
+														<td>Bộ phụ kiện</td>
+														<td>Bộ</td>
+														<td>1</td>
+														<td><span th:text="${#numbers.formatDecimal(banggia.field29,0,'COMMA', 0, 'POINT')}"></span><span>đ</span></td>
+													</tr>
+													</th:block>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="myFormUpdate">
+			<form th:action="@{/admin/update/banggia	}" method="put">
+				<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
+					aria-labelledby="updateModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="updateModalLabel">Update Bảng
+									Giá Lắp Đặt</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<p class="alert alert-info">Nhập thông tin</p>
+								<div class="col-sm-12">
+									<input type="hidden" name="id" id="id" value=""> <input
+										type=hidden class="form-control" id="dateCreated"
+										name="dateCreated" value="" />
+
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Ống
+												đồng máy treo tường Công suất 9.000BTU</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field1"
+													name="field1">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Ống
+												đồng máy treo tường Công suất 12.000BTU</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field2"
+													name="field2">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Ống
+												đồng máy treo tường Công suất 18.000BTU</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field3"
+													name="field3">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Ống
+												đồng máy treo tường Công suất 24.000BTU</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field4"
+													name="field4">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Ống
+												đồng máy âm trần, tủ 18.000 – 24.000BTU</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field5"
+													name="field5">
+											</div>
+										</div>
+									</div>
+
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Ống
+												đồng máy âm trần, tủ 28.000 – 30.000BTU</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field6"
+													name="field6">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Ống
+												đồng máy âm trần, tủ 36.000 – 50.000BTU</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field7"
+													name="field7">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Loại
+												máy treo tường Công suất 9.000BTU-12.000BTU</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field8"
+													name="field8">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Loại
+												máy treo tường Công suất 18.000BTU-24.000BTU</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field9"
+													name="field9">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Công
+												suất 9.000BTU-12.000BTU</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field10"
+													name="field10">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Công
+												suất 18.000BTU-24000BTU</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field11"
+													name="field11">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Công
+												lắp đặt máy tủ, âm trần 18.000 – 30.000BTU</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field12"
+													name="field12">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Công
+												lắp đặt máy tủ, âm trần 36.000 – 50.000BTU</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field13"
+													name="field13">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Dây
+												điện 2×1.5mm</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field14"
+													name="field14">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Dây
+												điện 2×2.5mm</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field15"
+													name="field15">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Dây
+												điện 2×4 mm</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field16"
+													name="field16">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Dây cáp
+												nguồn 3×4+1×2,5mm</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field17"
+													name="field17">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Ống
+												thoát nước mềm</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field18"
+													name="field18">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Ống
+												thoát nước cứng PVC Ø21</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field19"
+													name="field19">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Ống
+												thoát nước cứng PVC Ø21 + Bảo ôn</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field20"
+													name="field20">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Attomat
+												1 pha</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field21"
+													name="field21">
+											</div>
+										</div>
+									</div>
+
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Nhân
+												công đục tường đi ống gas, ống nước âm tường</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field22"
+													name="field22">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Vật tư
+												phụ (băng dính, que hàn, đai, ốc vít, bu lông..)</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field23"
+													name="field23">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Kiểm
+												tra, chỉnh sửa đường ống đã đi sẵn</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field24"
+													name="field24">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Chi phí
+												thang dây</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field25"
+													name="field25">
+											</div>
+										</div>
+									</div>
+
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Phí dải
+												đường ống (Trường hợp khách cấp vật tư)</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field26"
+													name="field26">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Công
+												lắp đặt</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field27"
+													name="field27">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Ống dẫn</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field28"
+													name="field28">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 style-dieuhoa">
+										<div class="form-group row">
+											<label for="" class="col-sm-3 col-form-label">Bộ phụ
+												kiện</label>
+											<div class="col-sm-9">
+												<input type="text" class="form-control" id="field29"
+													name="field29">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Close</button>
+								<input type="submit" class="btn btn-primary" value="Update" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>
